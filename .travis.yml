@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t kenmarut/react-docker-deploy -f Dockerfile.dev
+  - docker build -f Dockerfile.dev -t kenmarut/react-docker-deploy
 
 script:
   - docker run -e CI=true kenmarut/react-docker-deploy npm run test -- --coversage
