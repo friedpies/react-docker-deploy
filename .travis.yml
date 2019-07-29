@@ -6,4 +6,17 @@ before_install:
   - docker build -t kenmarut/react-docker-deploy -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true kenmarut/react-docker-deploy npm run test -- --coversage
+  - docker run -e CI=true kenmarut/react-docker-deploy npm run test -- --coverage
+
+deploy: 
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "react-docker-deploy"
+  env: "ReactDockerDeploy-env"
+  bucket_name: "elasticbeanstalk-us-east-2-528697806540"
+  bucket_path: "react-docker-deploy"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
