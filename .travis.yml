@@ -6,4 +6,4 @@ before_install:
   - docker build -t kenmarut/react-docker-deploy -f Dockerfile.dev
 
 script:
-  - docker run kenmarut/react-docker-deploy npm run test -- --coversage
+  - docker run -e CI=true kenmarut/react-docker-deploy npm run test -- --coversage
